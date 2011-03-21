@@ -1,5 +1,6 @@
 require 'active_record'
 require 'sinatra/base'
+require 'yaml'
 
 class Francis < Sinatra::Base
 
@@ -8,11 +9,12 @@ class Francis < Sinatra::Base
   end
 
   configure :development do
-    ActiveRecord::Base.establish_connection adapter: "sqlite3", database: "db/dev.sqlite"
+    dbconfig = YAML.load( File.read('config/database.yml') )
+    ActiveRecord::Base.establish_connection dbconfig['development']
   end
 
   configure :production do
-    require 'yaml'
+    #require 'yaml'
     dbconfig = YAML.load( File.read('config/database.yml') )
     ActiveRecord::Base.establish_connection dbconfig['production']
   end
@@ -22,7 +24,7 @@ class Francis < Sinatra::Base
   end
 
   before "*admin*" do
-
+    
   end
 
 

@@ -1,12 +1,21 @@
+require 'active_record'
+require 'yaml'
 
 namespace :db do
 
+  task :environment do
+    dbconfig = YAML.load( File.load('config/database.yml'))
+    ActiveRecord::Base.establish_connection dbconfig["development"]
+    ActiveRecord::Base.logger = Logger.new(File.open("logs/dev.log", "a"))
+  end
+
   desc "Migrate the Database"
-  task :migrate do
+  task :migrate => :environment do
     ActiveRecord::Migrator.migrate "db/migrate"
   end
 
-  desc "Create Migration; don't forget the NAME variable!"  # taken from https://github.com/bmizerany/sinatra-activerecord/blob/master/lib/sinatra/activerecord/rake.rb
+  # taken from https://github.com/bmizerany/sinatra-activerecord/blob/master/lib/sinatra/activerecord/rake.rb
+  desc "Create Migration; don't forget the NAME variable!"  
   task :create_migration do
     name = ENV['NAME']
     abort("no NAME specified. use `rake db:create_migration NAME=create_users`") if !name
