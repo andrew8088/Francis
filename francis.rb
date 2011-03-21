@@ -41,4 +41,8 @@ class Francis < Sinatra::Base
   # ===== Post Routes =====
 
 
+  not_found do
+    "404 - fill this in"
+  end
+
 end
