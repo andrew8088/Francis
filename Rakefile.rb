@@ -1,12 +1,13 @@
 require 'active_record'
+require 'logger'
 require 'yaml'
 
 namespace :db do
 
   task :environment do
-    dbconfig = YAML.load( File.load('config/database.yml'))
+    dbconfig = YAML.load( File.read('config/database.yml'))
     ActiveRecord::Base.establish_connection dbconfig["development"]
-    ActiveRecord::Base.logger = Logger.new(File.open("logs/dev.log", "a"))
+    ActiveRecord::Base.logger = Logger.new(File.open("log/dev.log", "a"))
   end
 
   desc "Migrate the Database"

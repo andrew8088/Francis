@@ -2,6 +2,9 @@ require 'active_record'
 require 'sinatra/base'
 require 'yaml'
 
+require_relative 'models/user'
+require_relative 'models/post'
+
 class Francis < Sinatra::Base
 
   configure do
@@ -26,7 +29,6 @@ class Francis < Sinatra::Base
   before "*admin*" do
     
   end
-
 
   # ===== Root Routes =====
   get '/' do
