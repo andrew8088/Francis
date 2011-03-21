@@ -8,7 +8,3 @@ gem "haml", "~>3.0"
 group :development do
   gem "shotgun"
 end
-
-group :production do
-  gem "yaml", "~>1.2"
-end
