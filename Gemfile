@@ -10,5 +10,5 @@ group :development do
 end
 
 group :production do
-  gem "yaml"
+  gem "yaml", "~>1.2"
 end
