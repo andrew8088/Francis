@@ -1,5 +1,5 @@
+require 'active_record'
 require 'sinatra/base'
-require 'activerecord'
 
 class Francis < Sinatra::Base
 
