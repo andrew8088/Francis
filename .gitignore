@@ -2,4 +2,4 @@
 tut_notes.txt
 log/**
 db/*.db
-
+db/seed.rb
